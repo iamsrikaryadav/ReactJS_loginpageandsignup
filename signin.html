@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Sign In</title>
+
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            border: 0;
+            text-align: center;
+        }
+        #main{
+            margin-top: 10%;
+        }
+        #main,#main1,p{
+            color: white;
+        }
+        body {
+            background-image:  url(bg1.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 700px;
+        }
+        #details {
+            background-color: rgb(107, 193, 243);
+            display: flex;
+            display: inline-block;
+            padding: 15px;  
+        }
+
+    </style>
+  </head>
+  <body>
+    <header>
+
+    <div id="root"></div>
+    <div id="form"></div>
+    <div id="cal"></div>
+    <div id="signup"></div>
+
+    <script type="text/babel">
+
+        class Test extends React.Component {
+          render() {
+              return (
+                  <div>
+                    <h1 id="main">Sign in</h1>
+                    <br/>
+                    <p id="main1">It's free and always will be</p> 
+                    <br/>
+                  </div>
+                  );     
+          }
+          }
+        
+        class Return1 extends React.Component {
+          render() {
+              return (
+                  <div>
+                    <br/>
+                    <p >Don't have an account?</p>
+                    <br/>
+                    <button id="but2" type="button" onClick={this.Goto1} >Sign up</button>
+                    <br/>
+                  </div>
+                  );     
+          }
+          Goto1 = () => {
+              location.href="signup.html"
+          }
+          }
+
+        class Message extends React.Component {
+          render() {
+              return (
+                  <div>
+                    <br/>
+                    <p>Welcome to the team!   {this.props.usn}</p> 
+                    <br/>
+                  </div>
+                  );     
+          }
+          }
+
+        class Form extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {usname:"",passw:""}
+            }
+
+            render() {
+                return (
+                    <div id="details">
+                        <br/>
+                        <input onChange={this.changeUS} id="user" type="text" placeholder="Username" />
+                        <br/> <br/>
+                        <input onChange={this.changePASS} id="password" type="password" placeholder="Password" />
+                        <br/> <br/>
+                        <button id="but" type="button" onClick={this.CheckUser} >Sign in</button>
+                        <br/><br/>
+                    </div>                     
+                    );
+            }
+
+            changeUS = (element) => {
+                this.setState({usname:element.target.value})
+            } 
+
+            changePASS = (element) => {
+                this.setState({passw: element.target.value})
+            } 
+
+            CheckUser = () => {
+                var un = localStorage.getItem("username")
+                var up = localStorage.getItem("password")
+                if (un === this.state.usname && up === this.state.passw) {
+                    ReactDOM.render(<Message usn={this.state.usname} />, document.querySelector("#cal"));
+                    alert("Welcome to the team! " +this.state.usname)
+                }
+            }
+        }
+
+          ReactDOM.render(<Test />, document.querySelector("#root"));
+          ReactDOM.render(<Form />, document.querySelector("#form"));
+          ReactDOM.render(<Return1 />, document.querySelector("#signup"));
+
+    </script>
+    </header>
+  </body>
+  
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Sign Up</title>
+
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            border: 0;
+            text-align: center;
+        }
+        #main{
+            margin-top: 10%;
+        }
+        #main,#main1,p{
+            color: white;
+        }
+        body {
+            background-image:  url(bg1.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 700px;
+        }
+        #details {
+            background-color: rgb(107, 193, 243);
+            display: flex;
+            display: inline-block;
+            padding: 15px;  
+        }
+
+    </style>
+  </head>
+  <body>
+    <header>
+
+    <div id="root"></div>
+    <div id="form"></div>
+    <div id="cal"></div>
+
+    <script type="text/babel">
+
+        class Test extends React.Component {
+          render() {
+              return (
+                  <div>
+                    <h1 id="main">Sign Up</h1>
+                    <br/>
+                    <p id="main1">Please fill in the form to create account</p> 
+                    <br/>
+                  </div>
+                  );     
+          }
+          }
+        
+        class Message extends React.Component {
+          render() {
+              return (
+                  <div>
+                    <br/>
+                    <p>Successfully registered:  {this.props.usn}</p> 
+                    <br/>
+                  </div>
+                  );     
+          }
+          }
+
+        class Form extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {first:"",last:"",mobile:0,date:"",usname:"",passw:""}
+            }
+
+            render() {
+                return (
+                    <div id="details">
+                        <br/>
+                        <input onChange={this.changeF} id="first" type="text" placeholder="First Name" />
+                        &nbsp;&nbsp;
+                        <input onChange={this.changeL} id="last" type="text" placeholder="Last Name" />
+                        <br/> <br/>
+                        <input onChange={this.changeM} id="mobile" type="number" placeholder="Mobile Number" />
+                        <br/> <br/>
+                        <input onChange={this.changeD} id="date" type="text" placeholder="Date Of Birth" />
+                        <br/> <br/>
+                        <input onChange={this.changeUS} id="user" type="text" placeholder="Username" />
+                        <br/> <br/>
+                        <input onChange={this.changePASS} id="password" type="password" placeholder="Password" />
+                        <br/> <br/>
+                        <button id="but" type="button" onClick={this.CheckUser} >Sign up</button>
+                        <br/><br/>
+                        
+                        <div id="bmi"></div>
+
+                    </div>                     
+                    );
+            }
+
+            changeF = (element) => {
+                this.setState({first:element.target.value})
+            } 
+
+            changeL = (element) => {
+                this.setState({last:element.target.value})
+            } 
+
+            changeM = (element) => {
+                this.setState({mobile:element.target.value})
+            } 
+
+            changeD = (element) => {
+                this.setState({date:element.target.value})
+            } 
+
+            changeUS = (element) => {
+                this.setState({usname:element.target.value})
+            } 
+
+            changePASS = (element) => {
+                this.setState({passw: element.target.value})
+            } 
+
+            CheckUser = () => {
+                localStorage.setItem("username",this.state.usname)
+                localStorage.setItem("password",this.state.passw)
+                ReactDOM.render(<Message usn={this.state.usname} />, document.querySelector("#cal"));
+                alert("Successfully registered: "+ this.state.usname)
+                location.href="signin.html"
+            }
+        }
+
+          ReactDOM.render(<Test />, document.querySelector("#root"));
+          ReactDOM.render(<Form />, document.querySelector("#form"));
+
+    </script>
+    </header>
+  </body>
+  
+</html>
